@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rowCount="5"
+    android:columnCount="4"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Text View"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView1"
+        android:layout_columnSpan="3" />
+    <Button
+        android:id="@+id/myButton"
+        android:text="1"
+        android:layout_row="1"
+        android:layout_column="0" />
+    <Button
+        android:id="@+id/myButton2"
+        android:text="2"
+        android:layout_row="1"
+        android:layout_column="1" />
+    <Button
+        android:text="3"
+        android:id="@+id/button1" />
+    <Button
+        android:text="+"
+        android:id="@+id/button2" />
+    <Button
+        android:text="4"
+        android:id="@+id/button3" />
+    <Button
+        android:text="5"
+        android:id="@+id/button4" />
+    <Button
+        android:text="6"
+        android:id="@+id/button5" />
+    <Button
+        android:text="-"
+        android:id="@+id/button6" />
+    <Button
+        android:text="7"
+        android:id="@+id/button7" />
+    <Button
+        android:text="8"
+        android:id="@+id/button8" />
+    <Button
+        android:text="9"
+        android:id="@+id/button9" />
+    <Button
+        android:text="*"
+        android:id="@+id/button10" />
+    <Button
+        android:text="Clear"
+        android:id="@+id/button11" />
+    <Button
+        android:text="0"
+        android:id="@+id/button12" />
+    <Button
+        android:text="="
+        android:id="@+id/button13" />
+    <Button
+        android:text="/"
+        android:id="@+id/button14" />
+</GridLayout>
