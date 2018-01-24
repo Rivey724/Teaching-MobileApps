@@ -7,38 +7,41 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="Text View"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/textView1"
-        android:layout_columnSpan="3" />
+        android:layout_columnSpan="4"
+        android:textColor="#000000"
+        android:background="#BFC9CA"
+        android:textSize="48dp" />
     <Button
-        android:id="@+id/myButton"
+        android:id="@+id/button1"
         android:text="1"
-        android:layout_row="1"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:layout_row="1" />
     <Button
-        android:id="@+id/myButton2"
-        android:text="2"
-        android:layout_row="1"
-        android:layout_column="1" />
+        android:id="@+id/button2"
+        android:text="2" />
     <Button
         android:text="3"
-        android:id="@+id/button1" />
-    <Button
-        android:text="+"
-        android:id="@+id/button2" />
-    <Button
-        android:text="4"
         android:id="@+id/button3" />
     <Button
-        android:text="5"
+        android:text="+"
+        android:id="@+id/buttonPlus"
+        android:layout_column="3" />
+    <Button
+        android:text="4"
         android:id="@+id/button4" />
     <Button
-        android:text="6"
+        android:text="5"
         android:id="@+id/button5" />
     <Button
-        android:text="-"
+        android:text="6"
         android:id="@+id/button6" />
+    <Button
+        android:text="-"
+        android:id="@+id/buttonMin" />
     <Button
         android:text="7"
         android:id="@+id/button7" />
@@ -50,17 +53,26 @@
         android:id="@+id/button9" />
     <Button
         android:text="*"
-        android:id="@+id/button10" />
+        android:id="@+id/buttonMult" />
     <Button
         android:text="Clear"
-        android:id="@+id/button11" />
+        android:id="@+id/Clear" />
     <Button
         android:text="0"
-        android:id="@+id/button12" />
+        android:id="@+id/button0" />
     <Button
-        android:text="="
-        android:id="@+id/button13" />
+        android:text="+ -"
+        android:id="@+id/SignChange" />
     <Button
         android:text="/"
-        android:id="@+id/button14" />
+        android:id="@+id/buttonDiv" />
+    <Button
+        android:text="Del"
+        android:id="@+id/Delete" />
+    <Button
+        android:text="."
+        android:id="@+id/Dot" />
+    <Button
+        android:text="="
+        android:id="@+id/Equal" />
 </GridLayout>
