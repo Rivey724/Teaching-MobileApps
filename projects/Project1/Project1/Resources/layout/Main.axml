@@ -60,18 +60,12 @@
     <Button
         android:text="0"
         android:id="@+id/button0" />
-    <Button
-        android:text="+ -"
-        android:id="@+id/SignChange" />
-    <Button
-        android:text="/"
-        android:id="@+id/buttonDiv" />
-    <Button
+   <Button
         android:text="Del"
         android:id="@+id/Delete" />
     <Button
-        android:text="."
-        android:id="@+id/Dot" />
+        android:text="/"
+        android:id="@+id/buttonDiv" />
     <Button
         android:text="="
         android:id="@+id/Equal" />

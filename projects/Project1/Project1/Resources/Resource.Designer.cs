@@ -47,17 +47,11 @@ namespace Project1
 			// aapt resource value: 0x7f05000d
 			public const int Clear = 2131034125;
 			
-			// aapt resource value: 0x7f050011
-			public const int Delete = 2131034129;
-			
-			// aapt resource value: 0x7f050012
-			public const int Dot = 2131034130;
-			
-			// aapt resource value: 0x7f050013
-			public const int Equal = 2131034131;
-			
 			// aapt resource value: 0x7f05000f
-			public const int SignChange = 2131034127;
+			public const int Delete = 2131034127;
+			
+			// aapt resource value: 0x7f050011
+			public const int Equal = 2131034129;
 			
 			// aapt resource value: 0x7f05000e
 			public const int button0 = 2131034126;
