@@ -10,7 +10,7 @@ namespace Project1
     public class MainActivity : Activity
     {
         int count = 1;
-        Stack<double> CalcS = new Stack<double>();
+        Stack<string> CalcS = new Stack<string>();
         char Operation;
         
 
@@ -87,23 +87,24 @@ namespace Project1
                 if (ViewButton != null)
                 {
                     TextView output = FindViewById<TextView>(Resource.Id.textView1);
-                    CalcS.Push(System.Convert.ToDouble(output.Text));
+                    CalcS.Push(System.Convert.ToString(output.Text));
+                    output.Text = "";
                     output.Text += ViewButton.Text;
                     if (output.Text == "+")
                     {
-                        Operation = '+';
+                        CalcS.Push(System.Convert.ToString('+'));
                     }
                     else if (output.Text == "-")
                     {
-                        Operation = '-';
+                        CalcS.Push(System.Convert.ToString('-'));
                     }
                     else if (output.Text == "/")
                     {
-                        Operation = '/';
+                        CalcS.Push(System.Convert.ToString('/'));
                     }
                     else
                     {
-                        Operation = '*';
+                        CalcS.Push(System.Convert.ToString('*'));
                     }
                     output.Text = "";
                 }
@@ -118,15 +119,15 @@ namespace Project1
             double Input2 = 0.0;
             double Result = 0.0;
             TextView output = FindViewById<TextView>(Resource.Id.textView1);
-            
+
             //Handles our operations
-            if(double.TryParse(output.Text, out Result) == false)
+            CalcS.Push(System.Convert.ToString(output.Text));
+            if (double.TryParse(output.Text, out Result) == true)
             {
-                CalcS.Push(System.Convert.ToDouble(output.Text));
-                output.Text = "";
                 //Once enter is pressed, preform operation
-                Input1 = CalcS.Pop();
-                Input2 = CalcS.Pop();
+                Input1 = System.Convert.ToDouble(CalcS.Pop());
+                Operation = System.Convert.ToChar(CalcS.Pop());
+                Input2 = System.Convert.ToDouble(CalcS.Pop());
                 if (Operation == '+')
                 {
                     output.Text = (Input1 + Input2).ToString();

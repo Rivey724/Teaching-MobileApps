@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:rowCount="5"
     android:columnCount="4"
-    android:minWidth="25px"
-    android:minHeight="25px">
+    android:minWidth="40px"
+    android:minHeight="40px">
     <TextView
         android:text="0"
         android:layout_width="match_parent"
@@ -18,8 +18,7 @@
     <Button
         android:id="@+id/button1"
         android:text="1"
-        android:layout_column="0"
-        android:layout_row="1" />
+        android:layout_column="0" />
     <Button
         android:id="@+id/button2"
         android:text="2" />
@@ -60,7 +59,7 @@
     <Button
         android:text="0"
         android:id="@+id/button0" />
-   <Button
+    <Button
         android:text="Del"
         android:id="@+id/Delete" />
     <Button
@@ -68,5 +67,8 @@
         android:id="@+id/buttonDiv" />
     <Button
         android:text="="
-        android:id="@+id/Equal" />
+        android:id="@+id/Equal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="4" />
 </GridLayout>
