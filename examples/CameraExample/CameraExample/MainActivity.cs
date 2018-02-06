@@ -70,6 +70,7 @@ namespace CameraExample
             //android.support.v4.content.FileProvider
             //getUriForFile(getContext(), "com.mydomain.fileprovider", newFile);
             //FileProvider.GetUriForFile
+            SetContentView(Resource.Layout.Editor);
 
             //The line is a problem line for Android 7+ development
             //intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
