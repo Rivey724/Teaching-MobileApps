@@ -5,6 +5,7 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
+using System;
 
 namespace CameraExample
 {
@@ -25,6 +26,7 @@ namespace CameraExample
         {
             base.OnCreate(savedInstanceState);
 
+         
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
@@ -34,6 +36,8 @@ namespace CameraExample
                 FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
             }
         }
+
+       
 
         /// <summary>
         /// Apparently, some android devices do not have a camera.  To guard against this,
@@ -70,7 +74,6 @@ namespace CameraExample
             //android.support.v4.content.FileProvider
             //getUriForFile(getContext(), "com.mydomain.fileprovider", newFile);
             //FileProvider.GetUriForFile
-            SetContentView(Resource.Layout.Editor);
 
             //The line is a problem line for Android 7+ development
             //intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
@@ -94,18 +97,18 @@ namespace CameraExample
             mediaScanIntent.SetData(contentUri);
             SendBroadcast(mediaScanIntent);
             */
-
+            SetContentView(Resource.Layout.Editor);
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
-            ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
 
             //AC: workaround for not passing actual files
             Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
             //Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
-            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Alpha8, true);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
             for(int i = 0; i < copyBitmap.Width; i++)
             {
                 for(int j = 0; j < copyBitmap.Height; j++)
