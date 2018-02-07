@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rowCount="5"
+    android:columnCount="4"
+    android:minWidth="40px"
+    android:minHeight="40px">
+    <TextView
+        android:text="0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_columnSpan="4"
+        android:textColor="#000000"
+        android:background="#BFC9CA"
+        android:textSize="48dp" />
+    <Button
+        android:id="@+id/button1"
+        android:text="1"
+        android:layout_column="0" />
+    <Button
+        android:id="@+id/button2"
+        android:text="2" />
+    <Button
+        android:text="3"
+        android:id="@+id/button3" />
+    <Button
+        android:text="+"
+        android:id="@+id/buttonPlus"
+        android:layout_column="3" />
+    <Button
+        android:text="4"
+        android:id="@+id/button4" />
+    <Button
+        android:text="5"
+        android:id="@+id/button5" />
+    <Button
+        android:text="6"
+        android:id="@+id/button6" />
+    <Button
+        android:text="-"
+        android:id="@+id/buttonMin" />
+    <Button
+        android:text="7"
+        android:id="@+id/button7" />
+    <Button
+        android:text="8"
+        android:id="@+id/button8" />
+    <Button
+        android:text="9"
+        android:id="@+id/button9" />
+    <Button
+        android:text="*"
+        android:id="@+id/buttonMult" />
+    <Button
+        android:text="Clear"
+        android:id="@+id/Clear" />
+    <Button
+        android:text="0"
+        android:id="@+id/button0" />
+    <Button
+        android:text="Del"
+        android:id="@+id/Delete" />
+    <Button
+        android:text="/"
+        android:id="@+id/buttonDiv" />
+    <Button
+        android:text="="
+        android:id="@+id/Equal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="4" />
+</GridLayout>

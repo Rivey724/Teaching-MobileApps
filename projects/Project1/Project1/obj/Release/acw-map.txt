@@ -1,0 +1,4 @@
+Project1.MainActivity, Project1;md5ba53881fd1fb5a40890c704708e71645.MainActivity
+Project1.MainActivity, Project1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ba53881fd1fb5a40890c704708e71645.MainActivity
+Project1.MainActivity;md5ba53881fd1fb5a40890c704708e71645.MainActivity
+project1.MainActivity;md5ba53881fd1fb5a40890c704708e71645.MainActivity
