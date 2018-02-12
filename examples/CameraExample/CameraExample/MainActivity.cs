@@ -7,9 +7,9 @@ using Android.Content.PM;
 using Android.Provider;
 using System;
 
-namespace CameraExample
+namespace Project2
 {
-    [Activity(Label = "CameraExample", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "Project2", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
         /// <summary>
@@ -26,7 +26,6 @@ namespace CameraExample
         {
             base.OnCreate(savedInstanceState);
 
-         
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
@@ -35,9 +34,53 @@ namespace CameraExample
                 CreateDirectoryForPictures();
                 FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
             }
+
+            //Create Buttons for Image Editing
+            Button Red_Button = FindViewById<Button>(Resource.Id.Red);
+            Button Blue_Button = FindViewById<Button>(Resource.Id.Blue);
+            Button Green_Button = FindViewById<Button>(Resource.Id.Green);
+            Button Negate_Red = FindViewById<Button>(Resource.Id.NegRed);
+            Button Negate_Blue = FindViewById<Button>(Resource.Id.NegBlue);
+            Button Negate_Green = FindViewById<Button>(Resource.Id.NegGreen);
+            Button High_Contrast = FindViewById<Button>(Resource.Id.HighContrast);
+            Button Add_Noise = FindViewById<Button>(Resource.Id.Noise);
+            Button GrayScale = FindViewById<Button>(Resource.Id.GrayScale);
+            Red_Button.Click += Red_Button_Click;
+            Blue_Button.Click += Red_Button_Click;
+            Green_Button.Click += Red_Button_Click;
+            Negate_Red.Click += Red_Button_Click;
+            Negate_Blue.Click += Red_Button_Click;
+            Negate_Green.Click += Red_Button_Click;
+            Add_Noise.Click += Red_Button_Click;
+            GrayScale.Click += Red_Button_Click;
+            High_Contrast.Click += Red_Button_Click;
+
         }
 
-       
+        private void Red_Button_Click(object sender, EventArgs e)
+        {
+            Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
+            //Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < copyBitmap.Width; i++)
+            {
+                for (int j = 0; j < copyBitmap.Height; j++)
+                {
+                    int p = copyBitmap.GetPixel(i, j);
+                    //00000000 00000000 00000000 00000000
+                    //long mask = (long)0xFF00FFFF;
+                    //p = p & (int)mask;
+                    Android.Graphics.Color c = new Android.Graphics.Color(p);
+                    c.R = 0;
+                    copyBitmap.SetPixel(i, j, c);
+                }
+            }
+        }
+
+
+
+
+
 
         /// <summary>
         /// Apparently, some android devices do not have a camera.  To guard against this,
@@ -132,6 +175,8 @@ namespace CameraExample
             // Dispose of the Java side bitmap.
             System.GC.Collect();
         }
+
+   
     }
 }
 
