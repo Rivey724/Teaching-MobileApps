@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="matchparent"
+        android:layout_weight="1.5">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="800px"
+            android:id="@+id/EditImage"
+            android:layout_marginBottom="0.0dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="matchparent"
+        android:layout_weight="0.5">
+        <CheckBox
+            android:text="CheckBox"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox1"
+            android:layout_weight="1" />
+        <CheckBox
+            android:text="CheckBox"
+            android:id="@+id/checkBox2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <CheckBox
+            android:text="CheckBox"
+            android:id="@+id/checkBox3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
 using System;
-using Android.Graphics;
 
 namespace CameraExample
 {
@@ -22,9 +21,6 @@ namespace CameraExample
         /// Used to track the directory that we'll be writing to between functions
         /// </summary>
         public static Java.IO.File _dir;
-
-        public static Bitmap Bitmap;
-        public static Bitmap copyBitmap;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -106,8 +102,8 @@ namespace CameraExample
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
-            int height = imageView.Height;
-            int width = imageView.Width;
+            int height = Resources.DisplayMetrics.HeightPixels;
+            int width = imageView.Height;
 
             //AC: workaround for not passing actual files
             Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
@@ -133,85 +129,8 @@ namespace CameraExample
                 bitmap = null;
             }
 
-            Button Red_Button = FindViewById<Button>(Resource.Id.Red);
-            Button Blue_Button = FindViewById<Button>(Resource.Id.Blue);
-            Button Green_Button = FindViewById<Button>(Resource.Id.Green);
-            Button Negate_Red = FindViewById<Button>(Resource.Id.NegRed);
-            Button Negate_Blue = FindViewById<Button>(Resource.Id.NegBlue);
-            Button Negate_Green = FindViewById<Button>(Resource.Id.NegGreen);
-            Button High_Contrast = FindViewById<Button>(Resource.Id.HighContrast);
-            Button Add_Noise = FindViewById<Button>(Resource.Id.Noise);
-            Button GrayScale = FindViewById<Button>(Resource.Id.GrayScale);
-            Red_Button.Click += Red_Button_Click;
-            Blue_Button.Click += Blue_Button_Click;
-            Green_Button.Click += Green_Button_Click;
-            Negate_Red.Click += Neg_Red_Click;
-            Negate_Blue.Click += Neg_Blue_Click;
-            Negate_Green.Click += Neg_Green_Click;
-            Add_Noise.Click += Add_Noise_Click;
-            GrayScale.Click += GrayScale_Click;
-            High_Contrast.Click += High_Contrast_Click;
-
-
             // Dispose of the Java side bitmap.
             System.GC.Collect();
-        }
-
-        private void High_Contrast_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void GrayScale_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Add_Noise_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Neg_Green_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Neg_Blue_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Neg_Red_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Green_Button_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Blue_Button_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Red_Button_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < copyBitmap.Width; i++)
-            {
-                for (int j = 0; j < copyBitmap.Height; j++)
-                {
-                    int p = copyBitmap.GetPixel(i, j);
-                    //00000000 00000000 00000000 00000000
-                    //long mask = (long)0xFF00FFFF;
-                    //p = p & (int)mask;
-                    Android.Graphics.Color c = new Android.Graphics.Color(p);
-                    c.R = 0;
-                    copyBitmap.SetPixel(i, j, c);
-                }
-            }
         }
     }
 }
