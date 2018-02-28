@@ -13,13 +13,15 @@ namespace GoogleApiExample
     [Activity(Label = "GoogleApiExample", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        public Boolean challenge_start = false;
+        bool challenge_start, Win;
         string[] PicItems = { "Tree", "Cup", "Car", "Apple", "Bannaa", "Table", "BackPack", "Cat", "Dog", "Onion", "Pan", "Door", "Battery", "Chair",
                                                   "Scissors", "Bed", "Water Bottle", "Refridgerator", "Toilet", "Sink", "Pencil", "Pen", "Bush", "Broom", "Shirt" };
 
         Android.Graphics.Bitmap bitmap;
         string ChosenItem;
-        bool Win;
+        private System.Timers.Timer _timer;
+        private int _Seconds;
+       
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,18 +39,6 @@ namespace GoogleApiExample
             //Starts the challenge
             Button Start_Challenge = FindViewById<Button>(Resource.Id.StartGame);
             Start_Challenge.Click += Start_Challenge_Click;
-
-            //Confirms that the pic taken is the one to be used
-            Button Confirm = FindViewById<Button>(Resource.Id.Submit);
-            Confirm.Click += Confirm_Click;
-
-            //Takes the user back to the camera to take another pic
-            Button AnotherPic = FindViewById<Button>(Resource.Id.AnotherPic);
-            AnotherPic.Click += TakePicture;
-
-            //End Screen button, returns you to the main screen
-            Button GoBack = FindViewById<Button>(Resource.Id.GoBack);
-            GoBack.Click += Back_to_Start;
         }
 
         private void Back_to_Start(object sender, EventArgs e)
@@ -62,10 +52,23 @@ namespace GoogleApiExample
             //Needs to take the user to the final game screen
             //Checks the API against the chosen item to see if the user
             //Took the right picture
-            SetContentView(Resource.Layout.GameEnd);
+            if (Win == true)
+            {
+                //Change Screen to GameEnd Screen
+                SetContentView(Resource.Layout.GameEnd);
 
-            ImageView Confirm_Pic = FindViewById<ImageView>(Resource.Id.PicView);
-            Confirm_Pic.SetImageBitmap(bitmap);
+                //Set ImageView to our image
+                ImageView EndScreen = FindViewById<ImageView>(Resource.Id.EndGame_Screen);
+                EndScreen.SetImageBitmap(bitmap);
+
+                //End Screen button, returns you to the main screen
+                Button GoBack = FindViewById<Button>(Resource.Id.GoBack);
+                GoBack.Click += Back_to_Start;
+
+                //Display that you found the correct item
+                TextView End = FindViewById<TextView>(Resource.Id.EndText);
+                End.Text = string.Format("Congratulations, you took a picture of: " + ChosenItem);
+            }
         }
          
         private void Start_Challenge_Click(object sender, EventArgs e)
@@ -78,50 +81,70 @@ namespace GoogleApiExample
             if (challenge_start == false)
             {
                 ChosenItem = PicItems[random_item];
+                TextView Screen_Item = FindViewById<TextView>(Resource.Id.ItemText);
+                Screen_Item.Text = string.Format("Take a Picture of: " + ChosenItem);
 
-                //Timer Section
-                TimeState s = new TimeState();
+                //Declare our count down Timer
+                _timer = new System.Timers.Timer();
 
-                TimerCallback timer_del = new TimerCallback(CheckStatus);
+                //Have it count down every second
+                _timer.Interval = 1000;
+                _timer.Elapsed += OnTimedEvent;
 
-                //SHOULD start on click
-                Timer game_time = new Timer(timer_del, s, 0, 1000);
+                //Start our countdown from 60 seconds
+                _Seconds = 60;
 
+                //Enable our timer
+                _timer.Enabled = true;
 
-                //TEST AREA FOR TIMER
-                s.timer = game_time;
-                //Changes challenge start to true so that clicking the button again
-                //Doesn't restart the timer
+                //Set challenge start to true so that 
+                //The timer doesn't restart
+
                 challenge_start = true;
 
                 //Declare ID for TimerDisplay and set the timer to it
-                TextView Timer_Disp = FindViewById<TextView>(Resource.Id.TimerDisplay);
-                Timer_Disp.Text = System.Convert.ToString(game_time);
+
             }
-
-          
-
         }
 
-        //Handles timer basics such as starting the counter 
-        //at 0 and decreasing it every second
-        private void CheckStatus(Object state)
+        private void OnTimedEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
-            TimeState t = (TimeState)state;
-            t.counter = 60;
-            t.counter--;
-            if(t.counter == 0)
+            //have our timer end the game when it hits zero
+            if (_Seconds == 0)
             {
+                _timer.Stop();
                 //This ends the game as time has ran out. Move to End layout and display that time has ran out
                 //TODO: implement layout change and text view text
                 //A Button should be made on the final layout to take you back, this button should
                 //Handle changing challenge_start to false
-                SetContentView(Resource.Id.EndGame_Screen);
+                //RunOnUiThread appears to update the UI when when something needs to be done
+                //Without a user input. Shoud look into this more in the future
+                RunOnUiThread(() =>
+                {
+                    SetContentView(Resource.Layout.GameEnd);
 
-                TextView End = FindViewById<TextView>(Resource.Id.EndText);
-                End.Text = string.Format("Sorry, time ran out!");
+                    //End Screen button, returns you to the main screen
+                    Button GoBack = FindViewById<Button>(Resource.Id.GoBack);
+                    GoBack.Click += Back_to_Start;
+
+                    TextView End = FindViewById<TextView>(Resource.Id.EndText);
+                    End.Text = string.Format("Sorry, time ran out!");
+                });
+                   
             }
+
+            //Display Timer to screen
+            TextView Timer_Disp = FindViewById<TextView>(Resource.Id.TimerDisplay);
+            RunOnUiThread(() =>
+            {
+                Timer_Disp.Text = System.Convert.ToString(_Seconds);
+                _Seconds--;
+            });
         }
+       
+        
+
+    
 
         /// <summary>
         /// Apparently, some android devices do not have a camera.  To guard against this,
@@ -140,10 +163,13 @@ namespace GoogleApiExample
 
         private void TakePicture(object sender, System.EventArgs e)
         {
-            Intent intent = new Intent(MediaStore.ActionImageCapture);
-            StartActivityForResult(intent, 0);
-        }
+            if (challenge_start == true)
+            {
+                Intent intent = new Intent(MediaStore.ActionImageCapture);
+                StartActivityForResult(intent, 0);
 
+            }
+        }
         // <summary>
         // Called automatically whenever an activity finishes
         // </summary>
@@ -158,9 +184,16 @@ namespace GoogleApiExample
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
-            ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
-            int height = Resources.DisplayMetrics.HeightPixels;
+            ImageView imageView = FindViewById<ImageView>(Resource.Id.PicView);
+            int height =  Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
+
+            //Confirms that the pic taken is the one to be used
+            FindViewById<Button>(Resource.Id.Submit).Click += Confirm_Click;
+
+            //Takes the user back to the camera to take another pic
+            Button AnotherPic = FindViewById<Button>(Resource.Id.AnotherPic);
+            AnotherPic.Click += TakePicture;
 
             //AC: workaround for not passing actual files
             bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
@@ -208,21 +241,20 @@ namespace GoogleApiExample
             var batch = new Google.Apis.Vision.v1.Data.BatchAnnotateImagesRequest();
             batch.Requests = new List<Google.Apis.Vision.v1.Data.AnnotateImageRequest>();
             batch.Requests.Add(request);
-
+            
             //send request.  Note that I'm calling execute() here, but you might want to use
             //ExecuteAsync instead
             var apiResult = client.Images.Annotate(batch).Execute();
-            for(int i = 0; i < 10; i++)
-                if (apiResult.Responses[i].LabelAnnotations[i].Description == ChosenItem)
-                {
-                    //Change Screen to GameEnd Screen
-                    SetContentView(Resource.Layout.GameEnd);
-                    //Display that you found the correct item
-                    TextView End = FindViewById<TextView>(Resource.Id.EndText);
-                    End.Text = string.Format("Congratulations, you took a picture of: " + ChosenItem);
+            for(int i = 0; i < apiResult.Responses[0].LabelAnnotations.Count; i++)
+            {
+                string ApiTest = apiResult.Responses[0].LabelAnnotations[i].Description;
+                if (ApiTest == ChosenItem)
+                { 
                     Win = true;
+                    TextView Pic_F = FindViewById<TextView>(Resource.Id.Pic_Fail);
+                    Pic_F.Text = string.Format("The picture matches!");
                 }
-
+            }
             if (Win != true)
             {
                 //Prompt the user to take another Picture
@@ -241,12 +273,6 @@ namespace GoogleApiExample
             System.GC.Collect();
         }
     }
-    class TimeState
-    {
-            public int counter = 0;
-            public Timer timer;
-        //IDEA: Can we cast the timer or counter to a variable and pass it to the screen?
-            
-    }
+ 
 }
 

@@ -56,6 +56,9 @@ namespace GoogleApiExample
 			// aapt resource value: 0x7f050007
 			public const int GoBack = 2131034119;
 			
+			// aapt resource value: 0x7f05000b
+			public const int ItemText = 2131034123;
+			
 			// aapt resource value: 0x7f050000
 			public const int PicView = 2131034112;
 			
@@ -76,9 +79,6 @@ namespace GoogleApiExample
 			
 			// aapt resource value: 0x7f050009
 			public const int takenPictureImageView = 2131034121;
-			
-			// aapt resource value: 0x7f05000b
-			public const int takenPictureImageView2 = 2131034123;
 			
 			static Id()
 			{
