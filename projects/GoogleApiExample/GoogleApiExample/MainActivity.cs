@@ -7,6 +7,7 @@ using Android.Content.PM;
 using Android.Provider;
 using System;
 using System.Threading;
+using Android.Graphics;
 
 namespace GoogleApiExample
 {
@@ -14,14 +15,15 @@ namespace GoogleApiExample
     public class MainActivity : Activity
     {
         bool challenge_start, Win;
-        string[] PicItems = { "Tree", "Cup", "Car", "Apple", "Bannaa", "Table", "BackPack", "Cat", "Dog", "Onion", "Pan", "Door", "Battery", "Chair",
-                                                  "Scissors", "Bed", "Water Bottle", "Refridgerator", "Toilet", "Sink", "Pencil", "Pen", "Bush", "Broom", "Shirt" };
+        //string[] PicItems = { "Tree", "Cup", "Car", "Apple", "Bannaa", "Table", "BackPack", "Cat", "Dog", "Onion", "Pan", "Door", "Battery", "Chair",
+        //                                          "Scissors", "Bed", "Water Bottle", "Refridgerator", "Toilet", "Sink", "Pencil", "Pen", "Bush", "Broom", "Shirt" };    
 
-        Android.Graphics.Bitmap bitmap;
+        string[] PicItems = { "board game" };
+        public static Bitmap bitmap;
+        public static Bitmap copyBitmap;
         string ChosenItem;
         private System.Timers.Timer _timer;
         private int _Seconds;
-       
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,6 +47,18 @@ namespace GoogleApiExample
         {
             //Takes the user back to the start screen
             SetContentView(Resource.Layout.Main);
+
+             //Reference for future: There are 25 items in the array
+            //Starts the challenge
+            Button Start_Challenge = FindViewById<Button>(Resource.Id.StartGame);
+            Start_Challenge.Click += Start_Challenge_Click;
+
+            //Have to reintalize buttons
+            if (IsThereAnAppToTakePictures() == true)
+            {
+                FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
+            }
+
         }
 
         private void Confirm_Click(object sender, EventArgs e)
@@ -59,7 +73,7 @@ namespace GoogleApiExample
 
                 //Set ImageView to our image
                 ImageView EndScreen = FindViewById<ImageView>(Resource.Id.EndGame_Screen);
-                EndScreen.SetImageBitmap(bitmap);
+                EndScreen.SetImageBitmap(copyBitmap);
 
                 //End Screen button, returns you to the main screen
                 Button GoBack = FindViewById<Button>(Resource.Id.GoBack);
@@ -75,8 +89,10 @@ namespace GoogleApiExample
         {
             //To not cause issues if the button is pressed again
             Random random_num = new Random();
-            int random_item = random_num.Next(0, 25);
-        
+            //  int random_item = random_num.Next(0, 25);
+
+            //Use this int random_item for testing
+            int random_item = random_num.Next(0, 0);
             //Handles starting the game, by starting a timer and grabbing a random item from the PicItems array
             if (challenge_start == false)
             {
@@ -92,7 +108,10 @@ namespace GoogleApiExample
                 _timer.Elapsed += OnTimedEvent;
 
                 //Start our countdown from 60 seconds
-                _Seconds = 60;
+                //For testing, use 10 for Timer run out, 120 for Taking a Picture. 60 for deploy
+                _Seconds = 120;
+                //_Seconds = 60;
+                //_Seconds = 10;
 
                 //Enable our timer
                 _timer.Enabled = true;
@@ -127,20 +146,31 @@ namespace GoogleApiExample
                     Button GoBack = FindViewById<Button>(Resource.Id.GoBack);
                     GoBack.Click += Back_to_Start;
 
+                    //Set Bitmpa
+                    ImageView FinalImage = FindViewById<ImageView>(Resource.Id.EndGame_Screen);
+                    FinalImage.SetImageBitmap(bitmap);
+
                     TextView End = FindViewById<TextView>(Resource.Id.EndText);
                     End.Text = string.Format("Sorry, time ran out!");
-                });
-                   
-            }
 
-            //Display Timer to screen
-            TextView Timer_Disp = FindViewById<TextView>(Resource.Id.TimerDisplay);
-            RunOnUiThread(() =>
+
+                });
+                //Set Challenge start to false to allow timer to start again
+                challenge_start = false;
+
+            }
+            if(Win == false)
             {
-                Timer_Disp.Text = System.Convert.ToString(_Seconds);
-                _Seconds--;
-            });
-        }
+                //Display Timer to screen
+                TextView Timer_Disp = FindViewById<TextView>(Resource.Id.TimerDisplay);
+                RunOnUiThread(() =>
+                {
+                    Timer_Disp.Text = System.Convert.ToString(_Seconds);
+                    _Seconds--;
+                });
+            }
+           }
+
        
         
 
@@ -198,6 +228,7 @@ namespace GoogleApiExample
             //AC: workaround for not passing actual files
             bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
 
+            copyBitmap = Bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
 
             //convert bitmap into stream to be sent to Google API
             string bitmapString = "";
