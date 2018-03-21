@@ -29,7 +29,8 @@ namespace Project2
 
         //Another Global Bitmap Variable that handles RemoveLast
         public static Bitmap LastBitmap;
-
+        public static Bitmap OriginalBitmap;
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -129,7 +130,8 @@ namespace Project2
             Bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
             //Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
             copyBitmap = Bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
-            for(int i = 0; i < copyBitmap.Width; i++)
+            OriginalBitmap = Bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < copyBitmap.Width; i++)
             {
                 for(int j = 0; j < copyBitmap.Height; j++)
                 {
@@ -186,7 +188,7 @@ namespace Project2
         {
             //This button Clears all image effects by grabbing the original Bitmap
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
-            copyBitmap = Bitmap;
+            copyBitmap = OriginalBitmap;
             imageView.SetImageBitmap(copyBitmap);
         }
 
