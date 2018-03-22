@@ -7,6 +7,7 @@ using Android.Content.PM;
 using Android.Provider;
 using System;
 using Android.Graphics;
+using System.IO;
 
 namespace Project2
 {
@@ -17,6 +18,7 @@ namespace Project2
         /// Used to track the file that we're manipulating between functions
         /// </summary>
         public static Java.IO.File _file;
+     
 
         /// <summary>
         /// Used to track the directory that we'll be writing to between functions
@@ -53,7 +55,8 @@ namespace Project2
             var ImageIntent = new Intent();
             ImageIntent.SetType("image/*");
             ImageIntent.SetAction(Intent.ActionGetContent);
-            StartActivityForResult(Intent.CreateChooser(ImageIntent, "Select Photo"), 0);
+            StartActivityForResult(Intent.CreateChooser(ImageIntent, "Select Photo"), 1);
+           
         }
 
 
@@ -118,6 +121,7 @@ namespace Project2
             mediaScanIntent.SetData(contentUri);
             SendBroadcast(mediaScanIntent);
             */
+            
             SetContentView(Resource.Layout.Editor);
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
@@ -126,8 +130,14 @@ namespace Project2
             int height = imageView.Height;
             int width = imageView.Width;
 
+            if(requestCode == 1)
+            {
+
+            }
             //AC: workaround for not passing actual files
+
             Bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
+            
             //Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
             copyBitmap = Bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
             OriginalBitmap = Bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
@@ -188,26 +198,33 @@ namespace Project2
         {
             //This button Clears all image effects by grabbing the original Bitmap
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
-            copyBitmap = OriginalBitmap;
-            imageView.SetImageBitmap(copyBitmap);
+            imageView.SetImageBitmap(OriginalBitmap);
+            copyBitmap = OriginalBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
-            //Will Implement this Laster (tomorrow)
+            ImageView imageView = FindViewById<ImageView>(Resource.Id.imageSave);
+            imageView.SetImageBitmap(copyBitmap);
+
+            var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            var filePath = System.IO.Path.Combine(sdCardPath, "test.png");
+            var stream = new FileStream(filePath, FileMode.Create);
+            copyBitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+            stream.Close();
         }
 
         private void Remove_Last_Click(object sender, EventArgs e)
         {
             //All this button does is Undo the Previous Image Effect
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
-            copyBitmap = LastBitmap;
-            imageView.SetImageBitmap(copyBitmap);
+            
+            imageView.SetImageBitmap(LastBitmap);
         }
 
         private void High_Contrast_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -247,7 +264,7 @@ namespace Project2
 
         private void GrayScale_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -267,7 +284,7 @@ namespace Project2
 
         private void Add_Noise_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -329,7 +346,7 @@ namespace Project2
 
         private void Neg_Green_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -348,7 +365,7 @@ namespace Project2
 
         private void Neg_Blue_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -367,7 +384,7 @@ namespace Project2
 
         private void Neg_Red_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -377,7 +394,7 @@ namespace Project2
                     Android.Graphics.Color c = new Android.Graphics.Color(p);
                     int tempRed = c.R;
                     tempRed = 255 - tempRed;
-                    c.B = Convert.ToByte(tempRed);
+                    c.R = Convert.ToByte(tempRed);
                     copyBitmap.SetPixel(i, j, c);
                 }
             }
@@ -386,7 +403,7 @@ namespace Project2
 
         private void Green_Button_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -403,7 +420,7 @@ namespace Project2
 
         private void Blue_Button_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
@@ -420,7 +437,7 @@ namespace Project2
 
         private void Red_Button_Click(object sender, EventArgs e)
         {
-            LastBitmap = copyBitmap;
+            LastBitmap = copyBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true); ;
             ImageView imageView = FindViewById<ImageView>(Resource.Id.EditImage);
             for (int i = 0; i < copyBitmap.Width; i++)
             {

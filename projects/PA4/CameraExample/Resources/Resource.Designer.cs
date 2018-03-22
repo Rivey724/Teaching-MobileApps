@@ -100,13 +100,19 @@ namespace Project2
 			public const int RemoveLast = 2131165194;
 			
 			// aapt resource value: 0x7f07000e
-			public const int launchCameraButton = 2131165198;
-			
-			// aapt resource value: 0x7f07000f
-			public const int launchGallery = 2131165199;
+			public const int TextSave = 2131165198;
 			
 			// aapt resource value: 0x7f07000d
-			public const int takenPictureImageView = 2131165197;
+			public const int imageSave = 2131165197;
+			
+			// aapt resource value: 0x7f070010
+			public const int launchCameraButton = 2131165200;
+			
+			// aapt resource value: 0x7f070011
+			public const int launchGallery = 2131165201;
+			
+			// aapt resource value: 0x7f07000f
+			public const int takenPictureImageView = 2131165199;
 			
 			static Id()
 			{
@@ -125,7 +131,10 @@ namespace Project2
 			public const int Editor = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int Main = 2130968577;
+			public const int ImageSave = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int Main = 2130968578;
 			
 			static Layout()
 			{
