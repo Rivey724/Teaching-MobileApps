@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "project-3-rivey",
+  "private_key_id": "7bd45346fc2ffe87389db206779e9aa6dcde76bb",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCaMVMSrRjR61e8\neRJMlFaUMzpIfzcqHMSAg3GyvfwFMBMqcrWQx4Gr8n5IPvD//wQrxrkuuHOcvcRJ\nff3PNgC2FhINNmgk4Po0ybAbKkQv1a+AaKyR/LzvOeOUlMTyMp+ZuWQJUz07C6s+\nzUGWXFEhCjOi40FXr7V6VR70fsQ4G1aMpEdzceWfCQpzukMKMeygmZyv8UBp2zlL\nW2xyxkSpinlsQYxGo0LsaKstIQi58EEchjGovh+dSPFi6EOiem3qFo3TJ7fmUne8\naf1s61lht/5kVfgxQmrU514wqhq5+JRpTfaITCpcpfbtTOpe4v4P1XlN/nxf5vKU\n0gSD+meTAgMBAAECggEAHV0UTWOybNONF0LVNckv/bQNvt2fI0FsOG8PuXLNqi1A\nER7cLdCYhKa+3sJBwfaOFEoZXOjad3h6B2bbbVkC5KoqUOLSDWfcri3UgC/Z4WQn\nsmP8rSZ80m/rQ5HbOaZjV3KDNvVnnTV5LJIJEfnNp2WadMQjXvACtuO76+KyOl7K\nm1QDiF3cN+nd88XSNyjzbHZg1Qt0zwnmLOVUl0Ebi64O0pzGhTCQZhXTGm8Nv4aJ\nw/DXK3+VaVaAgvhZCZEDpQfE2GSc8fFEWdwrwvTplMqkou7e3jEFt4kyJXHYdC/v\nyary/KqILmCWWZ7HAXfzsKxO0Jdq7QKIFcMuGAZDLQKBgQDS9esIsHQASCnbgflk\nL5jPwDyZTxgRi9pNXz3e91ukqAM8fhDKSDo0UeFcf+cFzna+Zqi3+m1mm26rjXa2\ntlpdLhOCLDtGHfpH+Dkp8EC0tS8PPzJrqAKuHb8QhlaD/3Rk1aTKILiEefjdB3GD\naoVHnzw7gzH4TZXHuqpb+RT4dwKBgQC7HL8dTH8EY46Fz07iteYSdUY1Q9vnZ0vg\n1vzrGNzPJZtUV2T9Jq8X7FtI4xFAFcEXbD7Sr4+05Wy95rzxMnB306n8JuN5SfH4\nIp4E7bRiu+TPErAsTYUxUzGp0qc9IanGS/yvVI/OHIEWh5du3f0EDf9ZsMjvqzGg\n1MZ8WGNsxQKBgQCD38a0/9kD9Bh2Z6GGx1o3RGydSZw6G7qzcz4yC172ZzDet8+3\nI79+xVCjijDYqGACVhpSJ/ILmk5sX1o+jW+foBYB4bSL+GFka/8QAGfyjvCED3Vt\nZvGF9oJhyhh7G02fWw5QbHPsHHM9eFG1XPlD9H6qlTC/j4B6Am5MYECDsQKBgHOu\ndCHjF2xZONZVswnLN/EVfFCWIbDRVkIt6LRY7LtNHtloJtG0RvBdepp3eETMrlKS\n48xSKmDGrxJBQ3NDofETdbalPGHSa7zjehrF845PaEj13uGlE8HJE51Q1YCf/VzR\nwemMOFRPnyeUsPUkXbdSCBslhzVV/BrZMdXSt7WZAoGBAJk47r90fVuJ6yxlIDMY\n4crX41vgrimnVetS5PuVJ198/mA9E6uDz2rNQm7FXdD+G8FOydu0DxP/LsWHjnL1\ne3DNvcvpnFOpD+kPmcoTF9obEiLbO/km4auILTlI2bYifcO76bIxpgafLR2NXaaX\ndU6tP0bZ5R9YlY0QZmGtK40k\n-----END PRIVATE KEY-----\n",
+  "client_email": "project-owner@project-3-rivey.iam.gserviceaccount.com",
+  "client_id": "103435693007695168488",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/project-owner%40project-3-rivey.iam.gserviceaccount.com"
+}
