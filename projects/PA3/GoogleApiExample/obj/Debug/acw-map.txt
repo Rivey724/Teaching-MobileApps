@@ -1,0 +1,4 @@
+GoogleApiExample.MainActivity, GoogleApiExample;md51ac0e0dd9a09f6518be3053e24feb8fe.MainActivity
+GoogleApiExample.MainActivity, GoogleApiExample, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51ac0e0dd9a09f6518be3053e24feb8fe.MainActivity
+GoogleApiExample.MainActivity;md51ac0e0dd9a09f6518be3053e24feb8fe.MainActivity
+googleapiexample.MainActivity;md51ac0e0dd9a09f6518be3053e24feb8fe.MainActivity
