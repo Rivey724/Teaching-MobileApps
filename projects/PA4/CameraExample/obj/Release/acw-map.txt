@@ -1,0 +1,4 @@
+Project2.MainActivity, CameraExample;md53c12c34a46b38cae64c910d7b054faed.MainActivity
+Project2.MainActivity, CameraExample, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md53c12c34a46b38cae64c910d7b054faed.MainActivity
+Project2.MainActivity;md53c12c34a46b38cae64c910d7b054faed.MainActivity
+project2.MainActivity;md53c12c34a46b38cae64c910d7b054faed.MainActivity
