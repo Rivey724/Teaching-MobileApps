@@ -15,10 +15,10 @@ namespace GoogleApiExample
     public class MainActivity : Activity
     {
         bool challenge_start, Win;
-        //string[] PicItems = { "Tree", "Cup", "Car", "Apple", "Bannaa", "Table", "BackPack", "Cat", "Dog", "Onion", "Pan", "Door", "Battery", "Chair",
-        //                                          "Scissors", "Bed", "Water Bottle", "Refridgerator", "Toilet", "Sink", "Pencil", "Pen", "Bush", "Broom", "Shirt" };    
+        string[] PicItems = { "Tree", "Cup", "Car", "Apple", "Bannaa", "Table", "BackPack", "Cat", "Dog", "Onion", "Pan", "Door", "Battery", "Chair",
+                                                  "Scissors", "Bed", "Water Bottle", "Refridgerator", "Toilet", "Sink", "Pencil", "Pen", "Bush", "Broom", "Shirt" };    
 
-        string[] PicItems = { "board game" };
+       // string[] PicItems = { "board game" };
         public static Bitmap bitmap;
         public static Bitmap copyBitmap;
         string ChosenItem;
@@ -228,7 +228,7 @@ namespace GoogleApiExample
             //AC: workaround for not passing actual files
             bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
 
-            copyBitmap = Bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
 
             //convert bitmap into stream to be sent to Google API
             string bitmapString = "";
